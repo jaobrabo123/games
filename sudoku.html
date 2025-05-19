@@ -10,9 +10,27 @@
 <body>
     <div id="sudoku">
         <h1>Sudoku</h1>
+        <div class="painel-superior">
+            <label for="dificuldade">Dificuldade:</label>
+            <select name="dificuldade" id="dificuldade" onchange="verificaOpcao(this)">
+                <option value="1">Fácil</option>
+                <option value="2" selected>Médio</option>
+                <option value="3">Difícil</option>
+                <option value="4">Personalizado</option>
+            </select>
+            <div id="personalizado" style="display: none;">
+                <label for="casasEscondidas">Casas Ocultas:</label>
+                <input type="number" name="casasEscondidas" id="casasEscondidas">
+                <label for="vidasPersona">Vidas:</label>
+                <input type="number" name="vidasPersona" id="vidasPersona">
+            </div>
+        </div>
         <button onclick="gerarTabuleiro()" id="button">Jogar</button>
-        <p id="textin" style="display: none;">Vidas: 5</p>
-        <p id="cronometro" style="display: none;">00:00</p>
+
+        <div class="status">
+            <p id="textin" style="display: none;">Vidas: 10</p>
+            <p id="cronometro" style="display: none;">Tempo: 00:00</p>
+        </div>
         <div id="tabuleiro" style="display: none;">
             <div id="tab2"></div>
         </div>

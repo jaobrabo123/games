@@ -41,11 +41,18 @@ var jogoativo = true
 var intervalo
 var nums = []
 var casais = []
-var vidas = 10
+var vidas = 0
 
 function gerarTabuleiro() {
     jogoativo = true
     vidas = 10
+    const dificuldade = document.querySelector("#dificuldade");
+    if (dificuldade.value === "4") {
+        vidas = Number(document.querySelector("#vidasPersona").value)
+        if (!vidas){
+            vidas=1
+        }
+    }
     const cronometro = document.querySelector("#cronometro")
     const textin = document.querySelector("#textin")
     const tabuleiro = document.querySelector("#tabuleiro")
@@ -115,7 +122,7 @@ function tentativa(casa){
         if(vidas==0){
             textin.innerHTML = `Vidas: ${vidas}`
             alert("Você Perdeu todas as vidas! :(")
-            botao.innerHTML = "Try again!"
+            botao.innerHTML = "Reiniciar"
             clearInterval(intervalo)
             jogoativo = false
         }
@@ -131,6 +138,26 @@ function gerarNumeros() {
     var casas = document.querySelectorAll(".casas")
     let tentativas = 0;
     let sucesso = false;
+    const dificuldade = document.querySelector('#dificuldade')
+    var dificuldadeSelecionada = Number(dificuldade.value)
+    var numdificuldade = 0
+    switch (dificuldadeSelecionada){
+        case 1:
+            numdificuldade = 20
+            break;
+        case 2:
+            numdificuldade = 39
+            break;
+        case 3:
+            numdificuldade = 45
+            break;
+        case 4:
+            numdificuldade = Number(document.querySelector("#casasEscondidas").value)
+            if(!numdificuldade){
+                numdificuldade = 1
+            }
+            break;
+    }
 
     while (!sucesso && tentativas < 1000) {
         tentativas++;
@@ -174,7 +201,7 @@ function gerarNumeros() {
     console.log(nums)
     console.log(`Número de tentativas: ${tentativas}`)
     
-    for (let i=0; i<39; i++){
+    for (let i=0; i<numdificuldade; i++){
         let idAleatorio = casais[Math.floor(Math.random() * casais.length)]
         while (casaprasumir.includes(idAleatorio)){
             idAleatorio = casais[Math.floor(Math.random() * casais.length)]
@@ -224,5 +251,19 @@ function cronometru(){
 }
 
 function atualizarCronometro(minutos, seconds) {
-    document.querySelector("#cronometro").innerHTML = `${minutos}:${seconds}`
+    document.querySelector("#cronometro").innerHTML = `Tempo: ${minutos}:${seconds}`
+}
+
+function verificaOpcao(select) {
+    const personalizadu = document.querySelector("#personalizado");
+    if (select.value === "4") {
+        personalizadu.style.display = "flex";
+    } else {
+        personalizadu.style.display = "none";
+    }
+}
+
+function personalizado() {
+    const personalizadu = document.querySelector("#personalizado")
+    personalizadu.style.display = "flex"
 }
