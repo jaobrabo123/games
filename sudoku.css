@@ -1,0 +1,45 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    font-family: Arial, sans-serif;
+    font-size: 1.2em;
+}
+
+.casas{
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.casas:hover{
+    background-color: rgb(209, 209, 209);
+    transition: 0.3s;
+}
+
+body{
+    background-color: deepskyblue;
+}
+
+#sudoku{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 10px;
+    gap: 10px;
+    
+}
+
+#tab2 {
+    background-color: gray;
+    width: min-content;    
+    padding: 5px;
+    display: grid;
+    grid-template-columns: repeat(9, 50px);
+    grid-template-rows: repeat(9, 50px);
+    gap: 5px;
+}

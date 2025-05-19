@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="sudoku.css">
+    <script src="sudoku.js" defer></script>
+    <title>Sudoku</title>
+</head>
+<body>
+    <div id="sudoku">
+        <h1>Sudoku</h1>
+        <button onclick="gerarTabuleiro()" id="button">Jogar</button>
+        <p id="textin" style="display: none;">Vidas: 5</p>
+        <div id="tabuleiro" style="display: none;">
+            <div id="tab2"></div>
+        </div>
+        <div id="opcao" style="display: none;">
+            
+            <label><input type="radio" name="numSelec" value="1">1</label>
+            <label><input type="radio" name="numSelec" value="2">2</label>
+            <label><input type="radio" name="numSelec" value="3">3</label>
+            <label><input type="radio" name="numSelec" value="4">4</label>
+            <label><input type="radio" name="numSelec" value="5">5</label>
+            <label><input type="radio" name="numSelec" value="6">6</label>
+            <label><input type="radio" name="numSelec" value="7">7</label>
+            <label><input type="radio" name="numSelec" value="8">8</label>
+            <label><input type="radio" name="numSelec" value="9">9</label>
+        </div>
+    </div>
+</body>
+</html>
