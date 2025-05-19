@@ -218,7 +218,7 @@ function cronometru(){
     intervalo = setInterval(() => {
         segundos++;
         var minutos = (Math.floor((segundos/60))).toString().padStart(2, '0')
-        var seconds = segundos.toString().padStart(2, '0')
+        var seconds = (segundos%60).toString().padStart(2, '0')
         atualizarCronometro(minutos, seconds);
     }, 1000);
 }
