@@ -38,6 +38,7 @@ const subgrades = [
 
 var jogoativo = true
 
+var intervalo
 var nums = []
 var casais = []
 var vidas = 10
@@ -45,6 +46,7 @@ var vidas = 10
 function gerarTabuleiro() {
     jogoativo = true
     vidas = 10
+    const cronometro = document.querySelector("#cronometro")
     const textin = document.querySelector("#textin")
     const tabuleiro = document.querySelector("#tabuleiro")
     const tab2 = document.querySelector("#tab2")
@@ -54,6 +56,7 @@ function gerarTabuleiro() {
     const newtab2 = document.createElement("div")
     newtab2.id = 'tab2'
     tabuleiro.appendChild(newtab2)
+    cronometro.style.display = 'flex'
     textin.innerHTML = `Vidas: ${vidas}`
     textin.style.display = 'flex'
     opcao.style.display = 'flex'
@@ -69,7 +72,8 @@ function gerarTabuleiro() {
     }
     botao.innerHTML = `Desistir`
     gerarNumeros()
-    
+    clearInterval(intervalo)
+    cronometru()
 }
 
 function tentativa(casa){
@@ -86,6 +90,7 @@ function tentativa(casa){
         return
     }
     const textin = document.querySelector("#textin")
+    const cronometro = document.querySelector("#cronometro")
     const botao = document.querySelector("#button")
     const skibiNum = skibi.value
     const casaid = casa.id
@@ -102,6 +107,7 @@ function tentativa(casa){
                 casa.style.background = "rgb(215, 255, 183)"
             })
             botao.innerHTML = "Vitória!"
+            clearInterval(intervalo)
             jogoativo = false
         }
     } else{
@@ -110,6 +116,7 @@ function tentativa(casa){
             textin.innerHTML = `Vidas: ${vidas}`
             alert("Você Perdeu todas as vidas! :(")
             botao.innerHTML = "Try again!"
+            clearInterval(intervalo)
             jogoativo = false
         }
         else{
@@ -128,9 +135,9 @@ function gerarNumeros() {
     while (!sucesso && tentativas < 1000) {
         tentativas++;
 
-        var numlinhas = Array.from({length: 9}, () => [...lista])
-        var numcolunas = Array.from({length: 9}, () => [...lista])
-        var numsubgrades = Array.from({length: 9}, () => [...lista])
+        var numlinhas = [[...lista],[...lista],[...lista],[...lista],[...lista],[...lista],[...lista],[...lista],[...lista]] //Array.from({length: 9}, () => [...lista])
+        var numcolunas = [[...lista],[...lista],[...lista],[...lista],[...lista],[...lista],[...lista],[...lista],[...lista]]
+        var numsubgrades = [[...lista],[...lista],[...lista],[...lista],[...lista],[...lista],[...lista],[...lista],[...lista]]
         nums = []
         
         sucesso = true
@@ -182,6 +189,7 @@ function gerarNumeros() {
         alert("Falha ao gerar tabuleiro. Tente novamente.")
         const botao = document.querySelector("#button")
         botao.innerHTML = "Jogar"
+        cronometro.style.display = 'none'
         textin.style.display = 'none'
         opcao.style.display = 'none'
         tabuleiro.style.display = 'none'
@@ -189,4 +197,20 @@ function gerarNumeros() {
     }
 
     
+}
+
+
+
+function cronometru(){
+    var segundos = 0  
+    intervalo = setInterval(() => {
+        segundos++;
+        var minutos = (Math.floor((segundos/60))).toString().padStart(2, '0')
+        var seconds = segundos.toString().padStart(2, '0')
+        atualizarCronometro(minutos, seconds);
+    }, 1000);
+}
+
+function atualizarCronometro(minutos, seconds) {
+    document.querySelector("#cronometro").innerHTML = `${minutos}:${seconds}`
 }
