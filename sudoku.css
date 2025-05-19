@@ -76,7 +76,7 @@ label {
 }
 
 label:hover {
-    background-color: #f0f0f0; /* Cor de fundo ao passar o mouse */
+    background-color: white; /* Cor de fundo ao passar o mouse */
     transform: scale(1.1); /* Aumenta ligeiramente o tamanho */
 }
 

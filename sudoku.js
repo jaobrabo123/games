@@ -90,7 +90,6 @@ function tentativa(casa){
         return
     }
     const textin = document.querySelector("#textin")
-    const cronometro = document.querySelector("#cronometro")
     const botao = document.querySelector("#button")
     const skibiNum = skibi.value
     const casaid = casa.id
@@ -99,6 +98,7 @@ function tentativa(casa){
     const skibidi = casais.indexOf(casaid)
 
     if (nums[skibidi] == skibiNum){
+        casinha.style.background = "wheat"
         casinha.innerHTML = `${skibiNum}`
         const casinhas = document.querySelectorAll(".casas")
         const ganhouSera = Array.from(casinhas).every(guis => guis.innerHTML !== '')
@@ -199,7 +199,19 @@ function gerarNumeros() {
     
 }
 
+function destacar(radio) {
+    const casas = document.querySelectorAll(".casas")
+    var casasID = []
+    casas.forEach(element => {
+        casasID.push(element.id)
+        document.getElementById(element.id).style.background = ""
+    })
 
+    const casasDestacadas = casasID.filter(guis => document.getElementById(guis).innerHTML === (radio.value).toString())
+    casasDestacadas.forEach(element => {
+        document.getElementById(element).style.background = "wheat"
+    });
+}
 
 function cronometru(){
     var segundos = 0  
