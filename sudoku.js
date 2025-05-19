@@ -101,10 +101,8 @@ function tentativa(casa){
             casinhas.forEach(casa => {
                 casa.style.background = "rgb(215, 255, 183)"
             })
-            setTimeout(() =>  gerarNumeros(),1000)
-            setTimeout(() =>  casinhas.forEach(casa => {
-                casa.style.background  = ""
-            }),1000)
+            botao.innerHTML = "Vitória!"
+            jogoativo = false
         }
     } else{
         vidas = vidas-1
