@@ -40,11 +40,11 @@ var jogoativo = true
 
 var nums = []
 var casais = []
-var vidas = 5
+var vidas = 10
 
 function gerarTabuleiro() {
     jogoativo = true
-    vidas = 5
+    vidas = 10
     const textin = document.querySelector("#textin")
     const tabuleiro = document.querySelector("#tabuleiro")
     const tab2 = document.querySelector("#tab2")
@@ -54,6 +54,7 @@ function gerarTabuleiro() {
     const newtab2 = document.createElement("div")
     newtab2.id = 'tab2'
     tabuleiro.appendChild(newtab2)
+    textin.innerHTML = `Vidas: ${vidas}`
     textin.style.display = 'flex'
     opcao.style.display = 'flex'
     tabuleiro.style.display = 'flex'
@@ -61,7 +62,7 @@ function gerarTabuleiro() {
     for (let i = 0; i < 81; i++) {
         const novaDiv = document.createElement("div")
         novaDiv.className = 'casas'
-        novaDiv.id = `casa${i}`
+        novaDiv.id = `casa${i}` 
         newtab2.appendChild(novaDiv)
         novaDiv.addEventListener('click', () => tentativa(novaDiv))
         casais.push(novaDiv.id)
