@@ -131,7 +131,7 @@ function tentativa(casa){
             alert("Tentativa incorreta")
         }
     }
-    console.log(skibidi, skibiNum)
+    console.log(`casa e número selecionado: `+ skibidi, skibiNum)
 }
 
 function gerarNumeros() {
@@ -155,6 +155,8 @@ function gerarNumeros() {
             numdificuldade = Number(document.querySelector("#casasEscondidas").value)
             if(!numdificuldade){
                 numdificuldade = 1
+            } else if(numdificuldade>81){
+                numdificuldade = 81
             }
             break;
     }
@@ -171,8 +173,8 @@ function gerarNumeros() {
 
         for (let i = 0; i < 81; i++) {
             let coluna = colunas.findIndex(alec => alec.includes(i));
-            let linha = linhas.findIndex(g => g.includes(i));
-            let subgrade = subgrades.findIndex(g => g.includes(i));
+            let linha = linhas.findIndex(guis => guis.includes(i));
+            let subgrade = subgrades.findIndex(guis => guis.includes(i));
 
             let numposslinha = numlinhas[linha];
             let numposscoluna = numcolunas[coluna];
@@ -198,7 +200,7 @@ function gerarNumeros() {
         
     }
     var casaprasumir = []
-    console.log(nums)
+    console.log(`Todos números da grade: ${nums}`)
     console.log(`Número de tentativas: ${tentativas}`)
     
     for (let i=0; i<numdificuldade; i++){
@@ -210,7 +212,7 @@ function gerarNumeros() {
         const casa = document.getElementById(idAleatorio)
         casa.innerHTML = ''
     }
-    console.log(casaprasumir)
+    console.log(`Casas pra sumir: ${casaprasumir}`)
 
     if (!sucesso) {
         alert("Falha ao gerar tabuleiro. Tente novamente.")
@@ -222,8 +224,6 @@ function gerarNumeros() {
         tabuleiro.style.display = 'none'
         return
     }
-
-    
 }
 
 function destacar(radio) {
