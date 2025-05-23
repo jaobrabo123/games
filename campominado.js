@@ -278,14 +278,14 @@ function tentativa(casa){
         alert("Você perdeu")
         return
     }
+    document.querySelector(`#${casa}`).innerHTML = valores[revelar]
+    document.querySelector(`#${casa}`).style.background = 'white'
     var revelations = 0
     casas.forEach(element => {
         if (element.innerHTML!=''){
             revelations++
         }
     });
-    document.querySelector(`#${casa}`).innerHTML = valores[revelar]
-    document.querySelector(`#${casa}`).style.background = 'white'
     if (revelations==casas.length){
         tentativaAllow = false
         alert("Você ganhou")
