@@ -284,10 +284,10 @@ function tentativa(casa){
             revelations++
         }
     });
+    document.querySelector(`#${casa}`).innerHTML = valores[revelar]
+    document.querySelector(`#${casa}`).style.background = 'white'
     if (revelations==casas.length){
         tentativaAllow = false
         alert("Você ganhou")
     }
-    document.querySelector(`#${casa}`).innerHTML = valores[revelar]
-    document.querySelector(`#${casa}`).style.background = 'white'
 }
