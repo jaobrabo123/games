@@ -1,9 +1,14 @@
 var casasID = []
 var gerarBombas = true
 var botarBandeira = false
+var tentativaAllow = true
 var totBombs = 0
-var flags
+var flags = 0
 var valores = []
+var bordaDireita = []
+var bordaEsquerda = []
+var removerDireita = [7,4,2]
+var removerEsquerda = [5,3,0]
 
 document.addEventListener("DOMContentLoaded", function () {
     const areaCampo = document.querySelector("#areaCampo")
@@ -26,6 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function verificaOpcao(select){
+    tentativaAllow = true
     const areaCampo = document.querySelector("#areaCampo")
     const campo = document.querySelector("#campo")
     const contador = document.querySelector("#contador")
@@ -75,6 +81,7 @@ function verificaOpcao(select){
 
 function reset(){
     verificaOpcao(document.querySelector("#dificuldade"))
+    tentativaAllow = true
 }
 
 function bandeira(casa){
@@ -82,6 +89,7 @@ function bandeira(casa){
         return
     }
     const contador = document.querySelector("#contador")
+    const casas = document.querySelectorAll(".casas")
     if (casa.innerHTML == `<i class="fa-solid fa-flag"></i>`) {
         casa.innerHTML = "";
         flags++
@@ -92,11 +100,22 @@ function bandeira(casa){
             flags++
             return;
         }
+        
         casa.innerHTML = `<i class="fa-solid fa-flag"></i>`;
+        var revelations = 0
+        casas.forEach(element => {
+            if (element.innerHTML!=''){
+                revelations++
+            }
+        });
+        if (revelations==casas.length){
+            tentativaAllow = false
+            alert("Você ganhou")
+        }
         contador.textContent = `Bombas: ${flags}`
     }
 }
-
+var emvolta = []
 function bombas(numCasas, casablock){
     if(!gerarBombas){
         tentativa(casablock)
@@ -105,28 +124,79 @@ function bombas(numCasas, casablock){
     gerarBombas = false
     botarBandeira = true
     const casas = document.querySelectorAll(".casas")
-    var emvolta = []
+    emvolta = []
     totBombs = 0
     valores = Array(casasID.length).fill(0);
     switch (numCasas) {
         case 81:
             totBombs = 10
-            emvolta = [-10,-9,-8,-1,1,8,9,10] //Casas em volta pra verificar quantas bombas tem perto
+            emvolta = [
+                -10,-9,-8,
+                -1,1,
+                8,9,10
+            ] //Casas em volta pra verificar quantas bombas tem perto
+            bordaDireita = [
+                8,17,26,
+                35,44,53,
+                62,71,80
+            ]
+            bordaEsquerda = [
+                0,9,18,
+                27,36,45,
+                54,63,72
+            ]
             break;
         case 256:
             totBombs = 40
-            emvolta = [-17,-16,-15,-1,1,15,16,17] //Casas em volta pra verificar quantas bombas tem perto
+            emvolta = [
+                -17,-16,-15,
+                -1,1,
+                15,16,17
+            ] //Casas em volta pra verificar quantas bombas tem perto
+            bordaDireita = [
+                15,31,47,63,
+                79,95,111,127,
+                143,159,175,191,
+                207,223,239,255
+            ]
+            bordaEsquerda = [
+                0,16,32,48,
+                64,80,96,112,
+                128,144,160,176,
+                192,208,224,240
+            ]
             break;
         case 480:
             totBombs = 99
-            emvolta = [-31,-30,-29,-1,1,29,30,31] //Casas em volta pra verificar quantas bombas tem perto
+            emvolta = [
+                -31,-30,-29,
+                -1,1,
+                29,30,31
+            ] //Casas em volta pra verificar quantas bombas tem perto
+            bordaDireita = [
+                29,59,89,119,
+                149,179,209,239,
+                269,299,329,359,
+                389,419,449,479
+            ]
+            bordaEsquerda = [
+                0,30,60,90,
+                120,150,180,210,
+                240,270,300,330,
+                360,390,420,450
+            ]
             break;
     }
     flags = totBombs
     nums = []
+    var casasGuisBlock = [] //casasID[casablock]
+    emvolta.forEach(gugu => {
+        casasGuisBlock.push(casasID[casasID.indexOf(casablock)+gugu])
+    });
+    
     for (let i = 0; i < totBombs; i++) {
         let numaleatorio = casasID[Math.floor(Math.random() * numCasas)];
-        while (nums.includes(numaleatorio)||numaleatorio==casablock){
+        while (nums.includes(numaleatorio)||numaleatorio==casablock||casasGuisBlock.includes(numaleatorio)){
             numaleatorio = casasID[Math.floor(Math.random() * numCasas)]
         }
         nums.push(numaleatorio)
@@ -139,7 +209,18 @@ function bombas(numCasas, casablock){
     for(let i = 0; i<casas.length; i++){
         if (valores[i]!==10){
             var bombasEmVolta = 0
-            emvolta.forEach(element => {
+            var emvolta2 = [...emvolta]
+            
+            if (bordaDireita.includes(i)){
+                removerDireita.forEach(element => {
+                    emvolta2.splice(element,1)
+                });
+            } else if (bordaEsquerda.includes(i)){
+                removerEsquerda.forEach(element => {
+                    emvolta2.splice(element,1)
+                });
+            }
+            emvolta2.forEach(element => {
                 if(valores[i+element]==10){
                     bombasEmVolta++
                 }
@@ -148,9 +229,65 @@ function bombas(numCasas, casablock){
         }
     }
     console.log(valores)
+    tentativa(casablock)
 }
 
 function tentativa(casa){
     var revelar = casasID.indexOf(casa)
+    const casas = document.querySelectorAll(".casas")
+    if (document.querySelector(`#${casa}`).innerHTML === `<i class="fa-solid fa-flag"></i>`){
+        return
+    }
+    if (tentativaAllow == false){
+        return
+    }
+    if (valores[revelar]==0){
+        var revelarEmVolta = []
+        var emvolta2 = [...emvolta]
+            
+        if (bordaDireita.includes(revelar)){
+            removerDireita.forEach(element => {
+                emvolta2.splice(element,1)
+            });
+        } else if (bordaEsquerda.includes(revelar)){
+            removerEsquerda.forEach(element => {
+                emvolta2.splice(element,1)
+            });
+        }
+        emvolta2.forEach(element => {
+            revelarEmVolta.push(revelar+element)
+        });
+        revelarEmVolta.forEach(element => {
+            const casaElemento = document.querySelector(`#casa${element}`);
+            if (casaElemento && casaElemento.style.background !== 'white') {
+                casaElemento.innerHTML = valores[element];
+                casaElemento.style.background = 'white';
+                tentativa(`casa${element}`);
+            }
+        });
+
+    }
+    if (valores[revelar]==10){
+        valores.forEach((valor, indice) => {
+            if(valor==10){
+                document.querySelector(`#casa${indice}`).innerHTML = `<i class="fa-solid fa-bomb" style="color: black;"></i>`
+                
+            }
+        });
+        tentativaAllow = false
+        alert("Você perdeu")
+        return
+    }
+    var revelations = 0
+    casas.forEach(element => {
+        if (element.innerHTML!=''){
+            revelations++
+        }
+    });
+    if (revelations==casas.length){
+        tentativaAllow = false
+        alert("Você ganhou")
+    }
     document.querySelector(`#${casa}`).innerHTML = valores[revelar]
+    document.querySelector(`#${casa}`).style.background = 'white'
 }
