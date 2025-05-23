@@ -9,6 +9,7 @@ var bordaDireita = []
 var bordaEsquerda = []
 var removerDireita = [7,4,2]
 var removerEsquerda = [5,3,0]
+var intervalo
 
 document.addEventListener("DOMContentLoaded", function () {
     const areaCampo = document.querySelector("#areaCampo")
@@ -110,6 +111,7 @@ function bandeira(casa){
         });
         if (revelations==casas.length){
             tentativaAllow = false
+            clearInterval(intervalo)
             alert("Você ganhou")
         }
         contador.textContent = `Bombas: ${flags}`
@@ -121,6 +123,8 @@ function bombas(numCasas, casablock){
         tentativa(casablock)
         return
     }
+    clearInterval(intervalo)
+    cronometru()
     gerarBombas = false
     botarBandeira = true
     const casas = document.querySelectorAll(".casas")
@@ -275,6 +279,7 @@ function tentativa(casa){
             }
         });
         tentativaAllow = false
+        clearInterval(intervalo)
         alert("Você perdeu")
         return
     }
@@ -288,6 +293,21 @@ function tentativa(casa){
     });
     if (revelations==casas.length){
         tentativaAllow = false
+        clearInterval(intervalo)
         alert("Você ganhou")
     }
+}
+
+function cronometru(){
+    var segundos = 0  
+    intervalo = setInterval(() => {
+        segundos++;
+        var minutos = (Math.floor((segundos/60))).toString().padStart(2, '0')
+        var seconds = (segundos%60).toString().padStart(2, '0')
+        atualizarCronometro(minutos, seconds);
+    }, 1000);
+}
+
+function atualizarCronometro(minutos, seconds) {
+    document.querySelector("#cronometro").innerHTML = `Tempo: ${minutos}:${seconds}`
 }
