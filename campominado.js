@@ -264,8 +264,15 @@ function tentativa(casa){
         revelarEmVolta.forEach(element => {
             const casaElemento = document.querySelector(`#casa${element}`);
             if (casaElemento && casaElemento.style.background !== 'white') {
-                casaElemento.innerHTML = valores[element];
-                casaElemento.style.background = 'white';
+                if (valores[element]==0){
+                    casaElemento.innerHTML = '.'
+                    casaElemento.style.color = 'white'
+                    casaElemento.style.background = 'white'
+                }else{
+                    casaElemento.innerHTML = valores[element];
+                    casaElemento.style.background = 'white';
+                }
+                
                 tentativa(`casa${element}`);
             }
         });
