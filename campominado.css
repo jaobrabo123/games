@@ -40,7 +40,7 @@ body {
 }
 
 .casas {
-    background-color: rgb(192, 192, 192);
+    background-color: lightgray;
     font-size: 20px; /* Ajuste o tamanho conforme necessário */
     line-height: 30px; /* Centraliza verticalmente na célula */
     display: block;

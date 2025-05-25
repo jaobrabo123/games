@@ -248,7 +248,9 @@ function tentativa(casa){
     if (valores[revelar]==0){
         var revelarEmVolta = []
         var emvolta2 = [...emvolta]
-            
+        document.querySelector(`#${casa}`).innerHTML = '.'
+        document.querySelector(`#${casa}`).color = 'white'
+        document.querySelector(`#${casa}`).background = 'white'
         if (bordaDireita.includes(revelar)){
             removerDireita.forEach(element => {
                 emvolta2.splice(element,1)
@@ -290,8 +292,54 @@ function tentativa(casa){
         alert("Você perdeu")
         return
     }
-    document.querySelector(`#${casa}`).innerHTML = valores[revelar]
-    document.querySelector(`#${casa}`).style.background = 'white'
+    switch(valores[revelar]){
+        case 1:
+            document.querySelector(`#${casa}`).innerHTML = valores[revelar]
+            document.querySelector(`#${casa}`).style.background = 'white'
+            document.querySelector(`#${casa}`).style.color = 'blue'
+            break;
+        case 2:
+            document.querySelector(`#${casa}`).innerHTML = valores[revelar]
+            document.querySelector(`#${casa}`).style.background = 'white'
+            document.querySelector(`#${casa}`).style.color = 'green'
+            break;
+        case 3:
+            document.querySelector(`#${casa}`).innerHTML = valores[revelar]
+            document.querySelector(`#${casa}`).style.background = 'white'
+            document.querySelector(`#${casa}`).style.color = 'red'
+            break;
+        case 4:
+            document.querySelector(`#${casa}`).innerHTML = valores[revelar]
+            document.querySelector(`#${casa}`).style.background = 'white'
+            document.querySelector(`#${casa}`).style.color = 'purple'
+            break;
+        case 5:
+            document.querySelector(`#${casa}`).innerHTML = valores[revelar]
+            document.querySelector(`#${casa}`).style.background = 'white'
+            document.querySelector(`#${casa}`).style.color = 'rgb(3, 0, 180)'
+            break;
+        case 6:
+            document.querySelector(`#${casa}`).innerHTML = valores[revelar]
+            document.querySelector(`#${casa}`).style.background = 'white'
+            document.querySelector(`#${casa}`).style.color = 'orange'
+            break;
+        case 7:
+            document.querySelector(`#${casa}`).innerHTML = valores[revelar]
+            document.querySelector(`#${casa}`).style.background = 'white'
+            document.querySelector(`#${casa}`).style.color = 'rgb(255, 0, 221)'
+            break;
+        case 8:
+            document.querySelector(`#${casa}`).innerHTML = valores[revelar]
+            document.querySelector(`#${casa}`).style.background = 'white'
+            document.querySelector(`#${casa}`).style.color = 'black'
+            break;
+        case 0:
+            document.querySelector(`#${casa}`).innerHTML = valores[revelar]
+            document.querySelector(`#${casa}`).style.background = 'white'
+            document.querySelector(`#${casa}`).style.color = 'white'
+            break;
+    }
+    
     var revelations = 0
     casas.forEach(element => {
         if (element.innerHTML!=''){
