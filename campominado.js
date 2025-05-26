@@ -32,6 +32,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function verificaOpcao(select){
+    clearInterval(intervalo)
     tentativaAllow = true
     const areaCampo = document.querySelector("#areaCampo")
     const campo = document.querySelector("#campo")
@@ -316,7 +317,7 @@ function tentativa(casa){
         case 5:
             document.querySelector(`#${casa}`).innerHTML = valores[revelar]
             document.querySelector(`#${casa}`).style.background = 'white'
-            document.querySelector(`#${casa}`).style.color = 'rgb(3, 0, 180)'
+            document.querySelector(`#${casa}`).style.color = 'rgb(2, 0, 133)'
             break;
         case 6:
             document.querySelector(`#${casa}`).innerHTML = valores[revelar]
