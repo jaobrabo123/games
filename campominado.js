@@ -249,14 +249,15 @@ function tentativa(casa){
     const casas = document.querySelectorAll(".casas")
     const tipo = document.querySelector('input[name="bombBand"]:checked')
     
-    if (document.querySelector(`#${casa}`).innerHTML == `<i class="fa-solid fa-flag"></i>`){
-        return
-    }
+    
     if (tentativaAllow == false){
         return
     }
     if (tipo.value == 2){
         bandeira(document.querySelector(`#${casa}`))
+        return
+    }
+    if (document.querySelector(`#${casa}`).innerHTML == `<i class="fa-solid fa-flag"></i>`){
         return
     }
     if (valores[revelar]==0){
