@@ -131,6 +131,14 @@ function bombas(numCasas, casablock){
         tentativa(casablock)
         return
     }
+    
+    const tipo = document.querySelector('input[name="bombBand"]:checked')
+
+    if (tipo.value == 2){
+        bandeira(document.querySelector(`#${casablock}`))
+        return
+    }
+
     clearInterval(intervalo)
     cronometru()
     gerarBombas = false
@@ -257,9 +265,11 @@ function tentativa(casa){
         bandeira(document.querySelector(`#${casa}`))
         return
     }
+
     if (document.querySelector(`#${casa}`).innerHTML == `<i class="fa-solid fa-flag"></i>`){
         return
     }
+
     if (valores[revelar]==0){
         var revelarEmVolta = []
         var emvolta2 = [...emvolta]
