@@ -1,3 +1,4 @@
+//Variáveis globais
 var casasID = []
 var gerarBombas = true
 var botarBandeira = false
@@ -11,6 +12,7 @@ var removerDireita = [7,4,2]
 var removerEsquerda = [5,3,0]
 var intervalo
 
+//Função pra gerar o mapa na dificuldade facil ao abrir o site
 document.addEventListener("DOMContentLoaded", function () {
     const areaCampo = document.querySelector("#areaCampo")
     const campo = document.querySelector("#campo")
@@ -24,13 +26,14 @@ document.addEventListener("DOMContentLoaded", function () {
         campo.appendChild(novaDiv)
         novaDiv.addEventListener('click', () => bombas(256,novaDiv.id))
         novaDiv.addEventListener('contextmenu', (alec) => {
-            alec.preventDefault(); // Previne o menu padrão
+            alec.preventDefault();
             bandeira(novaDiv);
         });
         casasID.push(novaDiv.id)
     }
 });
 
+//verifica a opção selecionada ao alterar o select pra gerar o mapa
 function verificaOpcao(select){
     clearInterval(intervalo)
     tentativaAllow = true
@@ -74,18 +77,20 @@ function verificaOpcao(select){
         newCampo.appendChild(novaDiv)
         novaDiv.addEventListener('click', () => bombas(numCasas,novaDiv.id))
         novaDiv.addEventListener('contextmenu', (alec) => {
-            alec.preventDefault(); // Previne o menu padrão
+            alec.preventDefault();
             bandeira(novaDiv);
         });
         casasID.push(novaDiv.id)
     }
 }
 
+//Funcao pra resetar o mapa (puxa a verificaOpcao pra gerar o mapa baseado na dificuldade)
 function reset(){
     verificaOpcao(document.querySelector("#dificuldade"))
     tentativaAllow = true
 }
 
+//Funcao pra botar e tirar as bandeiras
 function bandeira(casa){
     if(!botarBandeira){
         return
@@ -118,7 +123,9 @@ function bandeira(casa){
         contador.textContent = `Bombas: ${flags}`
     }
 }
+
 var emvolta = []
+//Funcao pra gerar as posições das bombas
 function bombas(numCasas, casablock){
     if(!gerarBombas){
         tentativa(casablock)
@@ -208,7 +215,7 @@ function bombas(numCasas, casablock){
     }
     nums.forEach(casaId => {
         const index = casasID.indexOf(casaId);
-        valores[index] = 10; // Marca como bomba
+        valores[index] = 10;
     })
     
     for(let i = 0; i<casas.length; i++){
@@ -240,10 +247,16 @@ function bombas(numCasas, casablock){
 function tentativa(casa){
     var revelar = casasID.indexOf(casa)
     const casas = document.querySelectorAll(".casas")
-    if (document.querySelector(`#${casa}`).innerHTML === `<i class="fa-solid fa-flag"></i>`){
+    const tipo = document.querySelector('input[name="bombBand"]:checked')
+    
+    if (document.querySelector(`#${casa}`).innerHTML == `<i class="fa-solid fa-flag"></i>`){
         return
     }
     if (tentativaAllow == false){
+        return
+    }
+    if (tipo.value == 2){
+        bandeira(document.querySelector(`#${casa}`))
         return
     }
     if (valores[revelar]==0){
