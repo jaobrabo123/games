@@ -17,8 +17,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const areaCampo = document.querySelector("#areaCampo")
     const campo = document.querySelector("#campo")
     areaCampo.appendChild(campo)
-    campo.style.gridTemplateColumns = `repeat(16, 30px)`;
-    campo.style.gridTemplateRows = `repeat(16, 30px)`;
+    campo.style.gridTemplateColumns = `repeat(16, 30px)`
+    campo.style.gridTemplateRows = `repeat(16, 30px)`
     for (let i = 0; i < 256; i++) {
         const novaDiv = document.createElement("div")
         novaDiv.className = 'casas'

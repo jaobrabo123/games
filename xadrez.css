@@ -1,0 +1,35 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    font-family: Arial, sans-serif;
+    font-size: 1.1em;
+}
+
+body {
+    background-color: rgb(167, 167, 167);
+}
+
+#main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+#tabuleiro{
+    display: grid;
+    border: 3px solid black;
+    width: min-content;
+    height: min-content;
+    grid-template-columns: repeat(8, 40px);
+    grid-template-rows: repeat(8, 40px);
+}
+
+.casas{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
